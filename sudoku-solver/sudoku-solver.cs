@@ -57,7 +57,6 @@
 						set.Add('8');
 						set.Add('9');
 
-						//i,j로 내 3x3 찾기
 						var rootX = i / 3;
 						var rootY = j / 3;
 
@@ -199,7 +198,6 @@
 		{
 			// i : x
 			// j : y
-			//가로 체크
 			for (int k = 0; k < boardSize; k++)
 			{
 				if (y != k)
