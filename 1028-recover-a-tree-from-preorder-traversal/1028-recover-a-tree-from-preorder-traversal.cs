@@ -16,7 +16,6 @@ public class Solution
 	public TreeNode RecoverFromPreorder(string traversal)
 	{
 		var stack = new Stack<TreeNode>();
-		var depth = 0;
 
 		for (int i = 0; i < traversal.Length; i++)
 		{
@@ -25,7 +24,14 @@ public class Solution
 			//Depth일 경우
 			if (item == '-')
 			{
-				depth++;
+				var dashLength = GetDashLength(traversal, i);
+				i += dashLength - 1;
+
+				while (stack.Count > dashLength)
+				{
+					stack.Pop();
+				}
+
 			}
 			//숫자일 경우
 			else
@@ -35,13 +41,8 @@ public class Solution
 				i += numberLength - 1;
 				var newNode = new TreeNode(value);
 
-				if (stack.Count != 0)
+				if (stack.Count > 0)
 				{
-					while (stack.Count > depth)
-					{
-						stack.Pop();
-					}
-
 					var parent = stack.Peek();
 
 					if (parent.left == null)
@@ -55,8 +56,6 @@ public class Solution
 				}
 
 				stack.Push(newNode);
-
-				depth = 0;
 			}
 		}
 
@@ -80,5 +79,24 @@ public class Solution
 		}
 
 		return numberLength;
+	}
+    
+    	private int GetDashLength(string traversal, int startIndex)
+	{
+		var dashLength = 0;
+
+		for (int i = startIndex; i < traversal.Length; i++)
+		{
+			if (traversal[i] == '-')
+			{
+				dashLength++;
+			}
+			else
+			{
+				break;
+			}
+		}
+
+		return dashLength;
 	}
 }
