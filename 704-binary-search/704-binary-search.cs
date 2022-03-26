@@ -6,43 +6,26 @@ public class Solution
 		var maxIndex = nums.Length - 1;
 		var midIndex = 0;
 
-		while (minIndex != maxIndex)
+		while (minIndex <= maxIndex)
 		{
-			var newMidIndext = (minIndex + maxIndex) / 2;
-
-			if (newMidIndext == midIndex)
-			{
-				break;
-			}
-			else
-			{
-				midIndex = newMidIndext;
-			}
+			midIndex = (minIndex + maxIndex) / 2;
 
 			var currentNum = nums[midIndex];
 
 			if (currentNum < target)
 			{
-				minIndex = midIndex;
+				minIndex = midIndex + 1;
 			}
 			else if(currentNum > target)
 			{
-				maxIndex = midIndex;
+				maxIndex = midIndex - 1;
 			}
 			else
 			{
 				return midIndex;
 			}
-		}
 
-		if (nums[minIndex] == target)
-		{
-			return minIndex;
-		}
 
-		if (nums[maxIndex] == target)
-		{
-			return maxIndex;
 		}
 
 		return -1;
