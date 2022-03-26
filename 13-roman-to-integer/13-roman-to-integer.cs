@@ -23,20 +23,15 @@ public class Solution
 
 		for (int i = 0; i < s.Length; i++)
 		{
-			var key = GetSymbol(s, i);
+			var key = GetSymbol(s, ref i);
 
 			result += symbolSheet[key];
-
-			if (key.Length != 1)
-			{
-				i++;
-			}
 		}
 
 		return result;
 	}
 
-	private string GetSymbol(string s, int index)
+	private string GetSymbol(string s, ref int index)
 	{
 		if (index == s.Length - 1)
 		{
@@ -48,6 +43,10 @@ public class Solution
 		if (!symbolSheet.TryGetValue(key, out var value))
 		{
 			key = s.Substring(index, 1);
+		}
+		else
+		{
+			index += 1;
 		}
 
 		return key;
