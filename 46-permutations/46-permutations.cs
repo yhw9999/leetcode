@@ -2,12 +2,11 @@ public class Solution
 {
 	bool[] visited;
 	List<IList<int>> result = new List<IList<int>>();
+	Stack<int> stack = new Stack<int>();
 
 	public IList<IList<int>> Permute(int[] nums)
 	{
 		visited = new bool[nums.Length];
-
-		var stack = new Stack<int>();
 
 		for (int i = 0; i < nums.Length; i++)
 		{
