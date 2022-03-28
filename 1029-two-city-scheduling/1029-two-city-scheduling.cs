@@ -7,7 +7,9 @@ public class Solution
 		var aCount = 0;
 		var bCount = 0;
 
-		foreach (var item in costs.OrderByDescending(x => Math.Abs(x[0] - x[1])))
+		var ordered = costs.OrderByDescending(x => Math.Abs(x[0] - x[1]));
+
+		foreach (var item in ordered)
 		{
 			var a = item[0];
 			var b = item[1];
@@ -21,8 +23,9 @@ public class Solution
 				}
 				else
 				{
-					sum += b;
-					bCount++;
+					var totalCount = aCount + bCount;
+					sum += ordered.Skip(totalCount).Take(size - bCount).Sum(x=> x[1]);
+					return sum;
 				}
 			}
 			else
@@ -34,8 +37,9 @@ public class Solution
 				}
 				else
 				{
-					sum += a;
-					aCount++;
+					var totalCount = aCount + bCount;
+					sum += ordered.Skip(totalCount).Take(size - aCount).Sum(x => x[0]);
+					return sum;
 				}
 			}
 		}
