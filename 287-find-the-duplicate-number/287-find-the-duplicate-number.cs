@@ -2,20 +2,21 @@ public class Solution
 {
 	public int FindDuplicate(int[] nums)
 	{
-		var set = new HashSet<int>();
-		var result = 0;
-
 		for (int i = 0; i < nums.Length; i++)
 		{
-			if (set.Contains(nums[i]))
-			{
-				result = nums[i];
-				break;
-			}
+            var value = Math.Abs(nums[i]);
+			var index = value - 1;
 
-			set.Add(nums[i]);
+			if (nums[index] < 0)
+			{
+				return value;
+			}
+			else
+			{
+				nums[index] = -nums[index];
+			}
 		}
 
-		return result;
+		return -1;
 	}
 }
