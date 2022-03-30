@@ -7,7 +7,7 @@ public class Solution
 
 		for (int i = 0; i < m; i++)
 		{
-			if (target >= matrix[i].First() && matrix[i].Last() >= target)
+			if (matrix[i].Last() >= target)
 			{
 				var index = Array.BinarySearch(matrix[i], target);
 
