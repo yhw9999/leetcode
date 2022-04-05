@@ -10,21 +10,24 @@ public class Solution
 
 		while (size > 0)
 		{
-			var minHeight = Math.Min(height[front], height[back]);
+			int minHeight;
+
+			if (height[front] > height[back])
+			{
+				minHeight = height[back];
+				back--;
+			}
+			else
+			{
+				minHeight = height[front];
+				front++;
+			}
+
 			var area = size-- * minHeight;
 
 			if (result < area)
 			{
 				result = area;
-			}
-
-			if (height[front] > height[back])
-			{
-				back--;
-			}
-			else
-			{
-				front++;
 			}
 		}
 
