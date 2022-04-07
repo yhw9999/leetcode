@@ -7,24 +7,24 @@ public class Solution
 		while (stoneList.Count > 1)
 		{
 			stoneList.Sort();
+			var lastIndex = stoneList.Count - 1;
 
-			var op1 = stoneList[stoneList.Count - 1];
-			var op2 = stoneList[stoneList.Count - 2];
+			var op1 = stoneList[lastIndex];
+			var op2 = stoneList[lastIndex - 1];
+
+			stoneList.RemoveAt(lastIndex);
 
 			if (op1 == op2)
 			{
-				stoneList.RemoveAt(stoneList.Count - 1);
-				stoneList.RemoveAt(stoneList.Count - 1);
+				stoneList.RemoveAt(lastIndex - 1);
 			}
 			else if(op1 > op2)
 			{
-				stoneList.RemoveAt(stoneList.Count - 1);
-				stoneList[stoneList.Count - 1] = op1 - op2;
+				stoneList[lastIndex - 1] = op1 - op2;
 			}
 			else
 			{
-				stoneList.RemoveAt(stoneList.Count - 1);
-				stoneList[stoneList.Count] = op2 - op1;
+				stoneList[lastIndex - 1] = op2 - op1;
 			}
 		}
 
