@@ -1,44 +1,37 @@
 public class KthLargest
 {
-	List<int> list;
-	int Kth;
-	public KthLargest(int k, int[] nums)
-	{
-		list = new List<int>(k);
-		Kth = k;
-		Array.Sort(nums);
+    PriorityQueue<int, int> pq;
+    int queueSize;
 
-		var addAmount = Math.Min(nums.Length, k);
+    public KthLargest(int k, int[] nums)
+    {
+        pq = new PriorityQueue<int, int>(k);
+        queueSize = k;
 
-		var stack = new Stack<int>();
+        for (int i = 0; i < nums.Length; i++)
+        {
+            Add(nums[i]);
+        }
+    }
 
-		var index = 0;
+    public int Add(int val)
+    {
+        if (pq.Count < queueSize)
+        {
+            pq.Enqueue(val, val);
+        }
+        else if(pq.Peek() < val)
+        {
+            pq.Dequeue();
+            pq.Enqueue(val, val);
+        }
 
-		while (k-- > 0 && index < nums.Length)
-		{
-			stack.Push(nums[nums.Length - index++ - 1]);
-		}
-
-		while (stack.Count > 0)
-		{
-			list.Add(stack.Pop());
-		}
-	}
-
-	public int Add(int val)
-	{
-		if (list.Count < Kth)
-		{
-			list.Add(val);
-		}
-		else if (list.First() < val)
-		{
-			list.RemoveAt(0);
-			list.Add(val);
-		}
-
-		list.Sort();
-
-		return list.First();
-	}
+        return pq.Peek();
+    }
 }
+
+/**
+ * Your KthLargest object will be instantiated and called as such:
+ * KthLargest obj = new KthLargest(k, nums);
+ * int param_1 = obj.Add(val);
+ */
