@@ -14,7 +14,6 @@ public class Solution
             dict[nums[i]]++;
         }
 
-        var result = dict.OrderByDescending(x => x.Value).Select(x => x.Key).Take(k).ToArray();
-        return result;
+        return dict.OrderByDescending(x => x.Value).Select(x => x.Key).Take(k).ToArray();
     }
 }
