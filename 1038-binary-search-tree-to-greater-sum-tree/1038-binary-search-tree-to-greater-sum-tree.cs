@@ -13,25 +13,21 @@
  */
 public class Solution
 {
-    int sum = 0;
-
     public TreeNode BstToGst(TreeNode root)
     {
-        Gst(root);
+        Gst(root, 0);
 
         return root;
     }
 
-    private void Gst(TreeNode node)
+    private int Gst(TreeNode node, int val)
     {
         if (node == null)
         {
-            return;
+            return val;
         }
 
-        Gst(node.right);
-        node.val += sum;
-        sum = node.val;
-        Gst(node.left);
+        node.val += Gst(node.right, val);
+        return Gst(node.left, node.val);
     }
 }
