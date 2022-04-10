@@ -6,7 +6,8 @@ public class Solution
 
         for (int i = 1; i < n; i++)
         {
-            result ^= start + i * 2;
+            start += 2;
+            result ^= start;
         }
 
         return result;
