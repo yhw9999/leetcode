@@ -4,10 +4,9 @@ public class Solution
     {
         var sb = new StringBuilder();
         var stack = new Stack<char>();
-        var remain = 0;
         while (columnNumber > 0)
         {
-            remain = columnNumber % 26;
+            var remain = columnNumber % 26;
             columnNumber--;
             columnNumber /= 26;
 
