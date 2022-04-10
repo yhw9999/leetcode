@@ -2,22 +2,21 @@ public class Solution
 {
     public int FirstUniqChar(string s)
     {
-        var increasement = new Dictionary<char, int>();
-        var indices = new Dictionary<char, int>();
+        var increasement = new int[26];
 
         for (int i = 0; i < s.Length; i++)
         {
-            if (!increasement.TryGetValue(s[i], out var value))
-            {
-                increasement.Add(s[i], 0);
-                indices.Add(s[i], i);
-            }
-
-            increasement[s[i]]++;
+            increasement[s[i] - 'a']++;
         }
 
-        var first = increasement.FirstOrDefault(x => x.Value == 1);
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (increasement[s[i] - 'a'] == 1)
+            {
+                return i;
+            }
+        }
 
-        return first.Key == default(char) ? -1 :indices[first.Key];
+        return -1;
     }
 }
