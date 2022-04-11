@@ -2,29 +2,23 @@ public class Solution
 {
     public int[] RearrangeArray(int[] nums)
     {
-        var positiveQueue = new Queue<int>(nums.Length / 2);
-        var negativeQueue = new Queue<int>(nums.Length / 2);
-
+        var result = new int[nums.Length];
+        var positiveIndex = 0;
+        var negativeIndex = 1;
         for (int i = 0; i < nums.Length; i++)
         {
             if (nums[i] > 0)
             {
-                positiveQueue.Enqueue(nums[i]);
+                result[positiveIndex] = nums[i];
+                positiveIndex += 2;
             }
             else
             {
-                negativeQueue.Enqueue(nums[i]);
+                result[negativeIndex] = nums[i];
+                negativeIndex += 2;
             }
         }
 
-        var index = 0;
-
-        while (positiveQueue.Count > 0)
-        {
-            nums[index++] = positiveQueue.Dequeue();
-            nums[index++] = negativeQueue.Dequeue();
-        }
-
-        return nums;
+        return result;
     }
 }
