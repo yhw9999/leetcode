@@ -8,30 +8,35 @@ public class Solution
             result[i] = new int[n];
         }
 
+        //배열의 위치
         var row = 0;
         var col = 0;
+
+        //방향
         var direction = Direction.Right;
-        var directionCount = n;
-        var directionChangedCount = 1;
+
+        //현재 진행 방향만큼 채워야하는 숫자의 개수
+        var remainDirectionCount = n;
+
+        //방향이 두번 바뀔 때 마다 채워야하는 숫자를 차감하기위한 변수
+        var decreaseAmount = 1;
+        //두번 바뀔때마다 감소량을 증가시켜줘야함
         var directionChanged = false;
 
         for (int i = 1; i <= Math.Pow(n, 2); i++)
         {
             result[row][col] = i;
 
-            if (--directionCount == 0)
+            if (--remainDirectionCount == 0)
             {
                 direction = (Direction)(((int)direction + 1) % 4);
-                directionCount = n - directionChangedCount;
+                remainDirectionCount = n - decreaseAmount;
 
-                if (directionChanged)
+                directionChanged = !directionChanged;
+
+                if (!directionChanged)
                 {
-                    directionChanged = false;
-                    directionChangedCount++;
-                }
-                else
-                {
-                    directionChanged = true;
+                    decreaseAmount++;
                 }
             }
 
