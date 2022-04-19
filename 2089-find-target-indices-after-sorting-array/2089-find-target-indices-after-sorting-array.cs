@@ -8,6 +8,11 @@ public class Solution
 
         for (int i = 0; i < nums.Length; i++)
         {
+            if (nums[i] < target)
+            {
+                continue;
+            }
+
             if (nums[i] == target)
             {
                 result.Add(i);
