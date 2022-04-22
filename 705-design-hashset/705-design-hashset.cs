@@ -1,6 +1,6 @@
 public class MyHashSet
 {
-    List<int> container = new List<int>();
+    bool[] map = new bool[1000001];
 
     public MyHashSet()
     {
@@ -9,23 +9,19 @@ public class MyHashSet
 
     public void Add(int key)
     {
-        if (!container.Contains(key))
-        {
-            container.Add(key);
-        }
+        map[key] = true;
     }
 
     public void Remove(int key)
     {
-        container.Remove(key);
+        map[key] = false;
     }
 
     public bool Contains(int key)
     {
-        return container.Contains(key);
+        return map[key];
     }
 }
-
 /**
  * Your MyHashSet object will be instantiated and called as such:
  * MyHashSet obj = new MyHashSet();
