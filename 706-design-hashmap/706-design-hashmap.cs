@@ -1,28 +1,28 @@
 public class MyHashMap
 {
-    int[,] map = new int[1000001, 2];
+    int[] map = new int[1000001];
 
     public MyHashMap()
     {
-        for (int i = 0; i < 1000001; i++)
+        for (int i = 0; i < map.Length; i++)
         {
-            map[i, 1] = -1;
+            map[i] = -1;
         }
     }
 
     public void Put(int key, int value)
     {
-        map[key, 1] = value;
+        map[key] = value;
     }
 
     public int Get(int key)
     {
-        return map[key, 1];
+        return map[key];
     }
 
     public void Remove(int key)
     {
-        map[key, 1] = -1;
+        map[key] = -1;
     }
 }
 
