@@ -3,22 +3,12 @@
 
 class PeekingIterator
 {
-    int size = 0;
-    int index = -1;
-    int current = 0;
+    bool hasNext = true;
     IEnumerator<int> iterator;
     // iterators refers to the first element of the array.
     public PeekingIterator(IEnumerator<int> iterator)
     {
         this.iterator = iterator;
-
-        while (iterator.MoveNext())
-        {
-            size++;
-        }
-
-        iterator.Reset();
-        iterator.MoveNext();
     }
 
     // Returns the next element in the iteration without advancing the iterator.
@@ -30,13 +20,8 @@ class PeekingIterator
     // Returns the next element in the iteration and advances the iterator.
     public int Next()
     {
-        current = iterator.Current;
-
-        if (HasNext())
-        {
-            index++;
-            iterator.MoveNext();
-        }
+        var current = iterator.Current;
+        hasNext = iterator.MoveNext();
 
         return current;
     }
@@ -44,6 +29,6 @@ class PeekingIterator
     // Returns false if the iterator is refering to the end of the array of true otherwise.
     public bool HasNext()
     {
-        return index < size;
+        return hasNext;
     }
 }
