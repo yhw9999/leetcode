@@ -1,40 +1,51 @@
-public class Solution {
-		public void Merge(int[] nums1, int m, int[] nums2, int n)
-		{
-			var currentIndex = nums1.Length - 1;
-			m--;
-			n--;
+public class Solution
+{
+    public void Merge(int[] nums1, int m, int[] nums2, int n)
+    {
+        if (n == 0)
+        {
+            return;
+        }
 
-			while (m >= 0 && n >= 0)
-			{
-				if (nums1[m] > nums2[n])
-				{
-					nums1[currentIndex--] = nums1[m--];
-				}
-				else
-				{
-					nums1[currentIndex--] = nums2[n--];
-				}
-			}
+        var left = new Queue<int>();
+        var right = new Queue<int>(nums2);
 
-			if (m >= 0)
-			{
-				while(currentIndex > -1)
-				{
-					nums1[currentIndex--] = nums1[m--];
-				}
+        for (int i = 0; i < m; i++)
+        {
+            left.Enqueue(nums1[i]);
+        }
 
-				return;
-			}
+        var index = 0;
 
-			if(n >= 0)
-			{
-				while (currentIndex > -1)
-				{
-					nums1[currentIndex--] = nums2[n--];
-				}
+        while (left.Count > 0 && right.Count > 0)
+        {
+            var leftValue = left.Peek();
+            var rightValue = right.Peek();
 
-				return;
-			}
-		}
+            if (leftValue > rightValue)
+            {
+                nums1[index++] = right.Dequeue();
+            }
+            else
+            {
+                nums1[index++] = left.Dequeue();
+            }
+        }
+
+        if (left.Count == 0)
+        {
+            while (right.TryDequeue(out var value))
+            {
+                nums1[index++] = value;
+            }
+        }
+
+        if (right.Count == 0)
+        {
+            while (left.TryDequeue(out var value))
+            {
+                nums1[index++] = value;
+            }
+        }
+    }
 }
