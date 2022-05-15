@@ -70,6 +70,8 @@ public class Solution
                 queue.Enqueue(node.right);
             }
         }
+        
+        frontNode.next = null;
 
         Add(queue);
     }
