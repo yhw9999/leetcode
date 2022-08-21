@@ -16,7 +16,6 @@ public class Solution {
     
     void Find(Stack<byte> stack, int startIndex)
     {
-        
         if (stack.Count == 4)
         {
             if (literal.Length == startIndex)
