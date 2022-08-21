@@ -16,7 +16,7 @@ public class Solution {
     
     void Find(List<string> list, int startIndex)
     {
-        if (list.Count == 4)
+        if (list.Count >= 4)
         {
             if (literal.Length == startIndex)
             {
