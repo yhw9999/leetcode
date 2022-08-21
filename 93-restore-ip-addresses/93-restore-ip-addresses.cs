@@ -55,12 +55,6 @@ public class Solution {
         
         var subString = literal.Substring(startIndex, partSize);
         
-        if (byte.TryParse(subString, out var toByte))
-        {
-            part = toByte;
-            return true;
-        }
-        
-        return false;
+        return byte.TryParse(subString, out part);
     }
 }
