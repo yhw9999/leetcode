@@ -7,14 +7,14 @@ public class Solution {
         result = new List<string>();
         literal = s;
         
-        var stack = new Stack<byte>();
+        var stack = new Stack<string>();
         
         Find(stack, 0);
         
         return result;
     }
     
-    void Find(Stack<byte> stack, int startIndex)
+    void Find(Stack<string> stack, int startIndex)
     {
         if (stack.Count >= 4)
         {
@@ -37,7 +37,7 @@ public class Solution {
         }
     }
     
-    bool GetAddressPart(int startIndex, int endIndex, out byte part)
+    bool GetAddressPart(int startIndex, int endIndex, out string part)
     {
         part = default;
         
@@ -55,6 +55,11 @@ public class Solution {
         
         var subString = literal.Substring(startIndex, partSize);
         
-        return byte.TryParse(subString, out part);
+        if(byte.TryParse(subString, out _)){
+            part = subString;
+            return true;
+        }
+        
+        return false;
     }
 }
