@@ -7,20 +7,20 @@ public class Solution {
         result = new List<string>();
         literal = s;
         
-        var stack = new Stack<string>();
+        var list = new List<string>();
         
-        Find(stack, 0);
+        Find(list, 0);
         
         return result;
     }
     
-    void Find(Stack<string> stack, int startIndex)
+    void Find(List<string> list, int startIndex)
     {
-        if (stack.Count == 4)
+        if (list.Count == 4)
         {
             if (literal.Length == startIndex)
             {
-                result.Add(string.Join('.', stack.Reverse()));
+                result.Add(string.Join('.', list));
             }
             
             return;
@@ -30,9 +30,9 @@ public class Solution {
         
         while (GetAddressPart(startIndex, endIndex, out var part))
         {
-            stack.Push(part);
-            Find(stack, endIndex + 1);
-            stack.Pop();
+            list.Add(part);
+            Find(list, endIndex + 1);
+            list.RemoveAt(list.Count - 1);
             endIndex++;
         }
     }
