@@ -7,20 +7,20 @@ public class Solution {
         result = new List<string>();
         literal = s;
         
-        var list = new List<byte>();
+        var stack = new Stack<string>();
         
-        Find(list, 0);
+        Find(stack, 0);
         
         return result;
     }
     
-    void Find(List<byte> list, int startIndex)
+    void Find(Stack<string> stack, int startIndex)
     {
-        if (list.Count == 4)
+        if (stack.Count == 4)
         {
             if (literal.Length == startIndex)
             {
-                result.Add(string.Join('.', list));
+                result.Add(string.Join('.', stack.Reverse()));
             }
             
             return;
@@ -30,14 +30,14 @@ public class Solution {
         
         while (GetAddressPart(startIndex, endIndex, out var part))
         {
-            list.Add(part);
-            Find(list, endIndex + 1);
-            list.RemoveAt(list.Count - 1);
+            stack.Push(part);
+            Find(stack, endIndex + 1);
+            stack.Pop();
             endIndex++;
         }
     }
     
-    bool GetAddressPart(int startIndex, int endIndex, out byte part)
+    bool GetAddressPart(int startIndex, int endIndex, out string part)
     {
         part = default;
         
@@ -55,6 +55,11 @@ public class Solution {
         
         var subString = literal.Substring(startIndex, partSize);
         
-        return byte.TryParse(subString, out part);
+        if(byte.TryParse(subString, out _)){
+            part = subString;
+            return true;
+        }
+        
+        return false;
     }
 }
