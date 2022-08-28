@@ -6,16 +6,9 @@ public class Solution {
         return false;
     }
         
-    while(n > 2)
+    while(n % 3 == 0)
     {
-        if(n % 3 == 0)
-        {
-            n /= 3;
-            continue;
-        }
-        else{
-            return false;
-        }
+        n /= 3;
     }
 
     return n == 1;
